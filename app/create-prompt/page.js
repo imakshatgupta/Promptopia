@@ -13,7 +13,28 @@ const CreatePrompt = () => {
     tag: "",
   });
 
-  const createPrompt = async (e) => {};
+  const createPrompt = async (e) => {
+    e.preventDefault();
+    setSubmitting(true);
+
+    try {
+      const res = await fetch("/api/prompt/new", {
+        method: "POST",
+        body: JSON.stringify({
+          prompt: Post.prompt,
+          tag: Post.tag,
+          userId: session?.user.id,
+        }),
+      });
+      if (response.ok){
+        Router.push('/');
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
     <Form
