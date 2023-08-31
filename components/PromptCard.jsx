@@ -7,6 +7,11 @@ import { usePathname , useRouter } from "next/navigation";
 
 const PromptCard = ({post,handleTagClick , handleEdit , handleDelete}) => {
 
+  if (!post.creator) {
+    // Return loading state or appropriate UI when creator data is not available yet
+    return <div></div>;
+  }
+
   const {data:session} = useSession();
   const pathName = usePathname();
   const router = useRouter();
